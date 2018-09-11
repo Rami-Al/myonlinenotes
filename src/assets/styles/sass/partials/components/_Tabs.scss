@@ -1,0 +1,125 @@
+#note_n_tabs {
+  height: 100%;
+  @include display-flex;
+
+  #note {
+    width: calc(100% - 170px);
+    height: 100%;
+    padding: 10px;
+    border: 0;
+    resize: none;
+    color: lighten(black, 30);
+    background: white;
+    z-index: 3;
+    overflow-y: auto;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 1px 0 $blue-nav;
+    }
+  }
+
+  #Tabs-container {
+    width: 170px;
+    background: $grey-bg;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 3px 10px;
+
+    .tab-wrapper {
+      position: relative;
+      display: inline-block;
+      height: auto;
+      margin-bottom: 20px;
+
+      &:hover {
+        * {
+          cursor: pointer;
+        }
+
+        i {
+          display: block;
+        }
+      }
+
+      .tab {
+        display: block;
+        margin: 0 auto;
+
+        font-size: 1em;
+        text-align: left;
+        word-wrap: break-word;
+
+        width: 120px;
+        padding: 13px 11px;
+
+        background: white;
+
+        border: 0;
+        border-radius: 0px;
+
+        &:focus {
+          padding: 12px 10px;
+          border: 1px dashed black;
+        }
+      }
+
+      .tab.active {
+        background: $blue-nav;
+        color: white;
+      }
+
+      i {
+        font-size: 1em;
+        display: none;
+        position: absolute;
+        top: 0px;
+        right: -2px;
+        color: lightgrey;
+
+        &:hover {
+          color: grey;
+        }
+      }
+
+      .tab.active + i {
+        color: lighten(lightgrey, 10);
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    #new-note {
+      width: 120px;
+      border: 0;
+      text-align: left;
+      margin: 0 auto;
+      display: block;
+      background: transparent;
+      cursor: default;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button#new-note i {
+      margin-left: 10px;
+      font-size: 1.4em;
+      text-align: center;
+      border-radius: 100%;
+      color: $blue-nav;
+      cursor: pointer;
+      @include transition(0.1s all);
+
+      &:hover {
+        color: darken($blue-nav, 10);
+      }
+      &:active {
+        color: $blue-nav;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: 1px solid $blue-nav;
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#root,
+#App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

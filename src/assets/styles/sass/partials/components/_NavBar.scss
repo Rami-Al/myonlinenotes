@@ -1,0 +1,34 @@
+nav {
+  z-index: 1;
+  width: 100%;
+  padding: 12px;
+  @include display-flex;
+  @include justify-content(space-between);
+  @include align-items(center);
+  align-items: center;
+  background: $blue-nav;
+  @include background(linear-gradient(to right, $green-nav, $blue-nav));
+
+  #logo {
+    max-width: 35px;
+  }
+
+  #user-loggedOut {
+    border-radius: 3px;
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+
+    &:hover {
+      background: mix($blue-nav, $green-nav, 10);
+    }
+
+    &:active {
+      background: darken(mix($blue-nav, $green-nav, 10), 3);
+    }
+  }
+}
+
+#user-loggedIn {
+}

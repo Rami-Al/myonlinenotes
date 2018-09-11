@@ -1,0 +1,50 @@
+#TextOptions {
+  z-index: 0;
+  width: 100%;
+  background: $grey-bg;
+  @include display-flex;
+  @include align-items(center);
+  button {
+    background: none;
+    border: 0;
+
+    padding: 12px 0;
+    width: 50px;
+
+    &:hover {
+      background: tint($green-nav, 70);
+    }
+
+    &:active {
+      background: $green-nav;
+      color: white;
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px tint($green-nav, 70);
+    }
+  }
+
+  #underline {
+    text-decoration: underline;
+  }
+
+  #delete {
+    align-self: center;
+    &:hover {
+      background: lighten(red, 45);
+      color: red;
+    }
+
+    &:active {
+      background: lighten(red, 8%);
+      color: white;
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px lighten(red, 45);
+    }
+  }
+}
