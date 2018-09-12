@@ -7,6 +7,7 @@ import ContentEditable from "react-contenteditable";
 import NavBar from "./Navbar.js";
 import TextOptions from "./TextOptions.js";
 import Tabs from "./Tabs.js";
+import LoginOverlay from "./LoginOverlay.js";
 
 function checkLoginState() {
   $.ajax({
@@ -24,7 +25,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "aa",
+      user: {
+        username: "",
+        password: "",
+        email: ""
+      },
+
       activeNoteID: 0,
       enabledTabRenameID: -1,
       notes: [
@@ -38,6 +44,8 @@ class App extends React.Component {
       ]
     };
   }
+
+  isLoggedIn() {}
 
   textChangeHandler(e) {
     let activeNoteID = this.state.activeNoteID;
@@ -53,11 +61,14 @@ class App extends React.Component {
     this.setState(stateCopy);
   }
 
-  selectNote(e) {
-    let notes = this.state.notes;
-    let noteID = e.target.id;
+  componentDidMount() {
+    $("#login-btn").click(() => {
+      $("#LoginOverlay").fadeIn(100);
+    });
 
-    this.setState({ activeNoteID: noteID });
+    $("#save").click(() => {
+      $("#LoginOverlay").fadeIn(100);
+    });
   }
 
   selectTextInside(element, type) {
@@ -70,27 +81,38 @@ class App extends React.Component {
     selection.addRange(range);
   }
 
+  selectNote(e) {
+    let notes = this.state.notes;
+    let noteID = e.target.id;
+
+    this.setState({ activeNoteID: noteID });
+  }
+
   toggleRename(e, enable) {
     let stateCopy = Object.assign({}, this.state);
+    let enabledTabRenameID = this.state.enabledTabRenameID;
 
     if (enable === true) {
       let tabID = e.target.previousSibling.id;
-      let el = e.target.previousSibling;
-
       stateCopy.enabledTabRenameID = tabID;
     } else if (enable === false) {
+      let tab = document.getElementById(enabledTabRenameID);
+      if (tab.innerHTML === "") {
+        tab.innerHTML = "Note x";
+        stateCopy.notes[enabledTabRenameID].title = tab.innerHTML;
+      }
       stateCopy.enabledTabRenameID = -1;
     }
 
     this.setState(stateCopy, () => {
       let enabledTabRenameID = this.state.enabledTabRenameID;
-      if (enabledTabRenameID !== -1) {
-        var tab = document.getElementById(enabledTabRenameID);
-        this.selectTextInside(tab);
-        $(tab).css("cursor", "text");
+      if (enabledTabRenameID === -1) {
+        $(".tab").css("cursor", "pointer");
         return;
       }
-      $(".tab").css("cursor", "pointer");
+      var tab = document.getElementById(enabledTabRenameID);
+      this.selectTextInside(tab);
+      $(tab).css("cursor", "text");
     });
   }
 
@@ -122,6 +144,7 @@ class App extends React.Component {
   }
 
   onSave() {
+    //// TODO:
     let notes = this.state.notes;
     $.ajax({
       url: "./php/save.php",
@@ -135,17 +158,11 @@ class App extends React.Component {
     let activeNoteID = this.state.activeNoteID;
     return (
       <div id="App">
+        <LoginOverlay />
         <NavBar isLoggedIn={false} logo="./src/logo.png" />
         <TextOptions onSave={() => this.onSave()} />
 
         <div id="note_n_tabs">
-          <ContentEditable
-            id="note"
-            html={notes[activeNoteID].note}
-            onChange={e => this.textChangeHandler(e)}
-            disabled={false}
-          />
-
           <Tabs
             notes={this.state.notes}
             activeNoteID={this.state.activeNoteID}
@@ -157,7 +174,15 @@ class App extends React.Component {
             onEnter={e => this.toggleRename(e, false)}
             newNote={() => this.newNote()}
           />
+          <ContentEditable
+            id="note"
+            html={notes[activeNoteID].note}
+            onChange={e => this.textChangeHandler(e)}
+            disabled={false}
+          />
         </div>
+
+        {/* <LoginOverlay /> */}
       </div>
     );
   }

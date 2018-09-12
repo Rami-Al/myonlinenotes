@@ -5,7 +5,7 @@ import logo from "./../logo.png";
 
 function User(props) {
   if (props.isLoggedIn === false) {
-    return <button id="user-loggedOut">Login</button>;
+    return <button id="login-btn">Login</button>;
   }
 }
 

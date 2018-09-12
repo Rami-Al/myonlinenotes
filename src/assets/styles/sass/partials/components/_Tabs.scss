@@ -1,37 +1,37 @@
 #note_n_tabs {
   height: 100%;
   @include display-flex;
+  padding-top: 5px;
 
   #note {
-    width: calc(100% - 170px);
-    height: 100%;
-    padding: 10px;
-    border: 0;
+    font-family: Tahoma;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    width: calc(100% - 170px - 12px);
+    height: calc(100% - 40px);
     resize: none;
-    color: lighten(black, 30);
-    background: white;
     z-index: 3;
+    padding: 15px 15px;
+    color: lighten(black, 20);
+    border: 1px solid darken($blue-primary, 10);
+    border-radius: 10px;
     overflow-y: auto;
 
     &:focus {
-      outline: 0;
-      box-shadow: 0 0 1px 0 $blue-nav;
     }
   }
 
   #Tabs-container {
-    width: 170px;
-    background: $grey-bg;
-
+    width: 150px;
+    text-align: center;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 3px 10px;
 
     .tab-wrapper {
       position: relative;
       display: inline-block;
       height: auto;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       &:hover {
         * {
@@ -44,29 +44,20 @@
       }
 
       .tab {
-        display: block;
-        margin: 0 auto;
-
-        font-size: 1em;
-        text-align: left;
+        font-size: 0.9em;
+        text-align: center;
         word-wrap: break-word;
-
         width: 120px;
         padding: 13px 11px;
-
         background: white;
-
-        border: 0;
-        border-radius: 0px;
-
-        &:focus {
-          padding: 12px 10px;
-          border: 1px dashed black;
-        }
+        border: 1px solid $blue-primary;
+        border-radius: 20px;
+        box-shadow: none;
+        vertical-align: middle;
       }
 
       .tab.active {
-        background: $blue-nav;
+        background: $blue-primary;
         color: white;
       }
 
@@ -74,8 +65,8 @@
         font-size: 1em;
         display: none;
         position: absolute;
-        top: 0px;
-        right: -2px;
+        top: 1px;
+        right: 1px;
         color: lightgrey;
 
         &:hover {
@@ -94,10 +85,10 @@
     #new-note {
       width: 120px;
       border: 0;
-      text-align: left;
+      text-align: center;
       margin: 0 auto;
       display: block;
-      background: transparent;
+      background: none;
       cursor: default;
 
       &:focus {
@@ -105,20 +96,20 @@
       }
     }
 
-    button#new-note i {
-      margin-left: 10px;
+    i {
+      margin-top: 5px;
       font-size: 1.4em;
       text-align: center;
       border-radius: 100%;
-      color: $blue-nav;
+      color: mix($green-primary, $blue-primary, 100);
       cursor: pointer;
       @include transition(0.1s all);
 
       &:hover {
-        color: darken($blue-nav, 10);
+        color: darken($green-primary, 10);
       }
       &:active {
-        color: $blue-nav;
+        color: $blue-primary;
       }
     }
   }

@@ -57,8 +57,11 @@ class Tabs extends React.Component {
     return (
       <div id="Tabs-container">
         {mappedNotes}
-        <button id="new-note" onClick={() => this.props.newNote()}>
-          <i className="fa fa-plus-circle" />
+        <button id="new-note">
+          <i
+            className="fa fa-plus-circle"
+            onClick={() => this.props.newNote()}
+          />
         </button>
       </div>
     );

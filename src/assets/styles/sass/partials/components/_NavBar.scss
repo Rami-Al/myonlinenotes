@@ -6,14 +6,14 @@ nav {
   @include justify-content(space-between);
   @include align-items(center);
   align-items: center;
-  background: $blue-nav;
-  @include background(linear-gradient(to right, $green-nav, $blue-nav));
+  background: $blue-primary;
+  @include background(linear-gradient(to right, $green-primary, $blue-primary));
 
   #logo {
     max-width: 35px;
   }
 
-  #user-loggedOut {
+  #login-btn {
     border-radius: 3px;
     padding: 5px 10px;
     background: transparent;
@@ -21,14 +21,14 @@ nav {
     color: white;
 
     &:hover {
-      background: mix($blue-nav, $green-nav, 10);
+      background: darken($blue-primary, 10);
     }
 
     &:active {
-      background: darken(mix($blue-nav, $green-nav, 10), 3);
+      background: $blue-primary;
     }
   }
 }
 
-#user-loggedIn {
+#logout-btn {
 }
